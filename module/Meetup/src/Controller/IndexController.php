@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Cinema\Controller;
+namespace Meetup\Controller;
 
-use Cinema\Entity\Film;
-use Cinema\Repository\FilmRepository;
-use Cinema\Form\FilmForm;
+use Meetup\Form\MeetupForm;
+use Meetup\Repository\MeetupRepository;
 use Zend\Http\PhpEnvironment\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -14,43 +13,43 @@ use Zend\View\Model\ViewModel;
 final class IndexController extends AbstractActionController
 {
     /**
-     * @var FilmRepository
+     * @var MeetupRepository
      */
-    private $filmRepository;
+    private $meetupRepository;
 
     /**
-     * @var FilmForm
+     * @var MeetupForm
      */
-    private $filmForm;
+    private $meetupForm;
 
-    public function __construct(FilmRepository $filmRepository, FilmForm $filmForm)
+    public function __construct(MeetupRepository $meetupRepository, MeetupForm $meetupForm)
     {
-        $this->filmRepository = $filmRepository;
-        $this->filmForm = $filmForm;
+        $this->meetupRepository = $meetupRepository;
+        $this->meetupForm = $meetupForm;
     }
 
     public function indexAction()
     {
         return new ViewModel([
-            'films' => $this->filmRepository->findAll(),
+            'meetups' => $this->meetupRepository->findAll(),
         ]);
     }
 
     public function addAction()
     {
-        $form = $this->filmForm;
+        $form = $this->meetupForm;
 
         /* @var $request Request */
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());
             if ($form->isValid()) {
-                $film = $this->filmRepository->createFilmFromNameAndDescription(
+                $meetup = $this->meetupRepository->createMeetupFromNameAndDescription(
                     $form->getData()['title'],
                     $form->getData()['description'] ?? ''
                 );
-                $this->filmRepository->add($film);
-                return $this->redirect()->toRoute('films');
+                $this->meetupRepository->add($meetup);
+                return $this->redirect()->toRoute('meetups');
             }
         }
 

@@ -2,24 +2,32 @@
 
 declare(strict_types=1);
 
-namespace Cinema\Form;
+namespace Meetup\Form;
 
 use Zend\Form\Element;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Validator\StringLength;
 
-class FilmForm extends Form implements InputFilterProviderInterface
+class MeetupForm extends Form implements InputFilterProviderInterface
 {
     public function __construct()
     {
-        parent::__construct('film');
+        parent::__construct('meetup');
 
         $this->add([
             'type' => Element\Text::class,
             'name' => 'title',
             'options' => [
                 'label' => 'Title',
+            ],
+        ]);
+
+        $this->add([
+            'type' => Element\Text::class,
+            'name' => 'description',
+            'options' => [
+                'label' => 'Description',
             ],
         ]);
 
@@ -42,7 +50,18 @@ class FilmForm extends Form implements InputFilterProviderInterface
                         'name' => StringLength::class,
                         'options' => [
                             'min' => 2,
-                            'max' => 4,
+                            'max' => 50,
+                        ],
+                    ],
+                ],
+            ],
+            'description' => [
+                'validators' => [
+                    [
+                        'name' => StringLength::class,
+                        'options' => [
+                            'min' => 2,
+                            'max' => 200,
                         ],
                     ],
                 ],

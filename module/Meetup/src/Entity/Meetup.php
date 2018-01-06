@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Cinema\Entity;
+namespace Meetup\Entity;
 
 use Ramsey\Uuid\Uuid;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Film
+ * Class Meetup
  *
  * Attention : Doctrine génère des classes proxy qui étendent les entités, celles-ci ne peuvent donc pas être finales !
  *
  * @package Application\Entity
- * @ORM\Entity(repositoryClass="\Cinema\Repository\FilmRepository")
- * @ORM\Table(name="films")
+ * @ORM\Entity(repositoryClass="\Meetup\Repository\MeetupRepository")
+ * @ORM\Table(name="meetups")
  */
-class Film
+class Meetup
 {
     /**
      * @ORM\Id

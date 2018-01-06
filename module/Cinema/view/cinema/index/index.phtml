@@ -1,9 +1,0 @@
-<h1>Films</h1>
-
-<ul>
-    <?php foreach ($this->films as $film): /* @var $film \Application\Entity\Film */ ?>
-    <li><?= $film->getTitle() ?></li>
-    <?php endforeach; ?>
-</ul>
-
-<a href="<?= $this->url('films/add'); ?>" class="btn btn-primary">Add new</a>

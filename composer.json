@@ -25,7 +25,7 @@
     "autoload": {
         "psr-4": {
             "Application\\": "module/Application/src/",
-            "Cinema\\": "module/Cinema/src/"
+            "Meetup\\": "module/Meetup/src/"
         }
     },
     "autoload-dev": {
