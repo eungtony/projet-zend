@@ -44,11 +44,14 @@ final class IndexController extends AbstractActionController
         if ($request->isPost()) {
             $form->setData($request->getPost());
             if ($form->isValid()) {
-                $meetup = $this->meetupRepository->createMeetupFromNameAndDescription(
+                $meetup = $this->meetupRepository->createMeetup(
                     $form->getData()['title'],
-                    $form->getData()['description'] ?? ''
+                    $form->getData()['description'],
+                    $form->getData()['beginningDate'],
+                    $form->getData()['endDate']
                 );
-                $this->meetupRepository->add($meetup);
+                $this->meetupRepository->persist($meetup);
+
                 return $this->redirect()->toRoute('meetups');
             }
         }
@@ -58,5 +61,34 @@ final class IndexController extends AbstractActionController
         return new ViewModel([
             'form' => $form,
         ]);
+    }
+
+    public function editAction()
+    {
+        $request = $this->getRequest();
+        $meetup  = $this->meetupRepository->find($this->params('id'));
+        $form = $this->meetupForm->bind($meetup);
+
+        if ($request->isPost()) {
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                $meetup = $form->getData();
+                $this->meetupRepository->persist($meetup);
+
+                return $this->redirect()->toRoute('meetups');
+            }
+        }
+
+        return new ViewModel(array(
+            'form' => $form
+        ));
+    }
+
+    public function deleteAction()
+    {
+        $meetup  = $this->meetupRepository->find($this->params('id'));
+        $this->meetupRepository->remove($meetup);
+
+        return $this->redirect()->toRoute('meetups');
     }
 }

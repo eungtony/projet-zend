@@ -1,9 +1,19 @@
 <h1>Meetups</h1>
 
-    <?php foreach ($this->meetups as $meetup): /* @var $meetup \Meetup\Entity\Meetup */ ?>
-        <h3><?= $meetup->getTitle() ?></h3>
-        <p><?= $meetup->getDescription() ?></p>
-        <hr>
-    <?php endforeach; ?>
+<?php foreach ($this->meetups as $meetup): /* @var $meetup \Meetup\Entity\Meetup */ ?>
+    <h3><?= $meetup->getTitle() ?></h3>
+    <p><?= $meetup->getDescription() ?></p>
+
+    <p>Beginning Date: <?= $meetup->getBeginningDate() ?></p>
+    <p>End Date: <?= $meetup->getEndDate() ?></p>
+
+    <a href="<?= $this->url('meetups/edit', ['id' => $meetup->getId()]) ?>">
+        Edit
+    </a>
+    <a href="<?= $this->url('meetups/delete', ['id' => $meetup->getId()]) ?>">
+        Delete
+    </a>
+    <hr>
+<?php endforeach; ?>
 
 <a href="<?= $this->url('meetups/add'); ?>" class="btn btn-primary">Add new</a>

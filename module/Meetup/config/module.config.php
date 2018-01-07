@@ -24,9 +24,27 @@ return [
                     'add' => [
                         'type' => Literal::class,
                         'options' => [
-                            'route'    => '/new',
+                            'route'    => '/add',
                             'defaults' => [
                                 'action'     => 'add',
+                            ],
+                        ],
+                    ],
+                    'edit' => [
+                        'type' => \Zend\Router\Http\Segment::class,
+                        'options' => [
+                            'route'    => '/editMeetup/:id',
+                            'defaults' => [
+                                'action'     => 'edit',
+                            ],
+                        ],
+                    ],
+                    'delete' => [
+                        'type' => \Zend\Router\Http\Segment::class,
+                        'options' => [
+                            'route'    => '/deleteMeetup/:id',
+                            'defaults' => [
+                                'action'     => 'delete',
                             ],
                         ],
                     ],
@@ -48,6 +66,7 @@ return [
         'template_map' => [
             'meetup/index/index' => __DIR__ . '/../view/meetup/index/index.phtml',
             'meetup/index/add' => __DIR__ . '/../view/meetup/index/add.phtml',
+            'meetup/index/edit' => __DIR__ . '/../view/meetup/edit/edit.phtml',
         ],
     ],
     'doctrine' => [

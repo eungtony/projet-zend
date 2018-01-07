@@ -10,14 +10,20 @@ use Doctrine\ORM\EntityRepository;
 final class MeetupRepository extends EntityRepository
 {
 
-    public function add($meetup) : void
+    public function persist($meetup) : void
     {
         $this->getEntityManager()->persist($meetup);
         $this->getEntityManager()->flush($meetup);
     }
 
-    public function createMeetupFromNameAndDescription(string $name, string $description)
+    public function remove($meetup) : void
     {
-        return new Meetup($name, $description);
+        $this->getEntityManager()->remove($meetup);
+        $this->getEntityManager()->flush($meetup);
+    }
+
+    public function createMeetup(string $name, string $description, string $beginningDate, string $endDate)
+    {
+        return new Meetup($name, $description, $beginningDate, $endDate);
     }
 }

@@ -20,7 +20,8 @@
         "ramsey/uuid": "^3.7",
         "symfony/dotenv": "^4.0",
         "zendframework/zend-i18n": "^2.7",
-        "zendframework/zend-form": "^2.11"
+        "zendframework/zend-form": "^2.11",
+        "zendframework/zend-filter": "^2.7"
     },
     "autoload": {
         "psr-4": {
