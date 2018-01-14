@@ -2,10 +2,11 @@
 
 <?php foreach ($this->meetups as $meetup): /* @var $meetup \Meetup\Entity\Meetup */ ?>
     <h3><?= $meetup->getTitle() ?></h3>
-    <p><?= $meetup->getDescription() ?></p>
-
-    <p>Beginning Date: <?= $meetup->getBeginningDate() ?></p>
-    <p>End Date: <?= $meetup->getEndDate() ?></p>
+    <p>
+        <a href="<?= $this->url('meetups/meetup', ['id' => $meetup->getId()]) ?>">
+            See more
+        </a>
+    </p>
 
     <a href="<?= $this->url('meetups/edit', ['id' => $meetup->getId()]) ?>">
         Edit

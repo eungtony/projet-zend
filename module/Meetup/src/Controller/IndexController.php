@@ -91,4 +91,13 @@ final class IndexController extends AbstractActionController
 
         return $this->redirect()->toRoute('meetups');
     }
+
+    public function meetupAction()
+    {
+        $meetup  = $this->meetupRepository->find($this->params('id'));
+
+        return new ViewModel(array(
+            'meetup' => $meetup
+        ));
+    }
 }

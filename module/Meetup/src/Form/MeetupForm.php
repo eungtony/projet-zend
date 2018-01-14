@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Meetup\Form;
 
+use Doctrine\Common\Persistence\ObjectManager;
+use DoctrineModule\Form\Element\ObjectSelect;
+use Meetup\Repository\MeetupRepository;
 use Zend\Form\Element\Submit;
 use Zend\Form\Element\Text;
 use Zend\Form\Element\Textarea;
@@ -18,9 +21,9 @@ class MeetupForm extends Form
     const DATE_END_POST = 'endDate';
 
     /**
-     * @var \DateTimeImmutable
+     * @var ObjectManager
      */
-    private $dateTime;
+    private $objectManager;
 
     public function __construct()
     {
@@ -42,7 +45,6 @@ class MeetupForm extends Form
         $title->setLabel('Titre');
         $title->setAttributes([
             'class' =>'form-control',
-            'placeholder' => 'Insérez un titre de Meetup ...'
         ]);
         $this->add($title);
 
@@ -50,7 +52,6 @@ class MeetupForm extends Form
         $description->setLabel('Description');
         $description->setAttributes([
             'class' => 'form-control',
-            'placeholder' => 'Insérez une description de Meetup ...'
         ]);
         $this->add($description);
 
@@ -61,6 +62,15 @@ class MeetupForm extends Form
         $dateEnd = new Date(self::DATE_END_POST);
         $dateEnd->setLabel('Date de fin');
         $this->add($dateEnd);
+
+        $organization = new ObjectSelect('organization');
+        $organization->setOptions([
+            'object_manager' => $this->objectManager,
+            'target_class' => 'Meetup\Entity\Organization',
+            'label' => 'name',
+            'required' => true,
+        ]);
+        $this->add($organization);
 
         $submit = new Submit('submit');
         $submit->setValue('Submit');

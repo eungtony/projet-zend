@@ -44,13 +44,20 @@ class Meetup
      */
     private $endDate;
 
-    public function __construct(string $title, string $description, string $beginningDate, string $endDate)
+    /**
+     * @ORM\ManyToOne(targetEntity="Organization", inversedBy="meetup")
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id")
+     */
+    private $organization;
+
+    public function __construct(string $title, string $description, string $beginningDate, string $endDate, $organization)
     {
         $this->id = Uuid::uuid4()->toString();
         $this->title = $title;
         $this->description = $description;
         $this->beginningDate = $beginningDate;
         $this->endDate = $endDate;
+        $this->organization = $organization;
     }
 
     public function getId()

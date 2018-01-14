@@ -48,6 +48,15 @@ return [
                             ],
                         ],
                     ],
+                    'meetup' => [
+                        'type' => \Zend\Router\Http\Segment::class,
+                        'options' => [
+                            'route'    => '/meetup/:id',
+                            'defaults' => [
+                                'action'     => 'meetup',
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ],
@@ -67,6 +76,7 @@ return [
             'meetup/index/index' => __DIR__ . '/../view/meetup/index/index.phtml',
             'meetup/index/add' => __DIR__ . '/../view/meetup/index/add.phtml',
             'meetup/index/edit' => __DIR__ . '/../view/meetup/edit/edit.phtml',
+            'meetup/index/meetup' => __DIR__ . '/../view/meetup/meetup/index.phtml',
         ],
     ],
     'doctrine' => [
